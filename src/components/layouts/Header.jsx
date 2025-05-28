@@ -10,13 +10,19 @@ const Header = () => {
             </a>
           </div>
           <div className="off-canvas off-canvas--right off-canvas--mobile" id="menu">
-            <a
-              href="#"
-              className="off-canvas__backdrop"
-            ></a>
+            <a href="#" className="off-canvas__backdrop"></a>
             <div className="off-canvas__child">
               <ul className="list f-2 list flexbox flexbox--center flexbox--responsive g-8">
-                <li><a href="#movies" className="link interactive">Movies</a></li>
+                <li>
+                  <a href="#premieres" className="link interactive">
+                    Premieres
+                  </a>
+                </li>
+                <li>
+                  <a href="#now-showing" className="link interactive">
+                    Movies
+                  </a>
+                </li>
                 <li><a href="#cinemas" className="link interactive">Cinemas</a></li>
                 <li><a href="#promotions" className="link interactive">Promotions</a></li>
                 <li><a href="#tickets" className="link interactive">My Tickets</a></li>

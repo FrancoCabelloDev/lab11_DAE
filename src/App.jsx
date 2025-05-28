@@ -1,8 +1,12 @@
 import { useState } from "react";
-import Footer from "./components/layouts/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Header from "./components/layouts/Header";
 import Hero from "./components/modules/Hero";
+import PremieresSection from "./components/modules/PremieresSection";
 import MovieList from "./components/modules/MovieList";
+import Footer from "./components/layouts/Footer";
 import { getMovies } from "./utils/movie.utils";
 
 const FAVORITE_KEY = "sin-e-favorites";
@@ -13,25 +17,21 @@ const App = () => {
     const stored = localStorage.getItem(FAVORITE_KEY);
     return stored ? JSON.parse(stored) : [];
   });
-
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleToggleFavorite = (movie) => {
-    setFavorites((prev) => {
-      const exists = prev.some((fav) => fav.id === movie.id);
-      let updated;
-      if (exists) {
-        updated = prev.filter((fav) => fav.id !== movie.id);
-      } else {
-        updated = [...prev, movie];
-      }
+  const handleToggleFavorite = movie => {
+    setFavorites(prev => {
+      const exists = prev.some(f => f.id === movie.id);
+      const updated = exists
+        ? prev.filter(f => f.id !== movie.id)
+        : [...prev, movie];
       localStorage.setItem(FAVORITE_KEY, JSON.stringify(updated));
       return updated;
     });
   };
 
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredMovies = movies.filter(m =>
+    m.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -39,8 +39,9 @@ const App = () => {
       <Header />
       <main className="main">
         <Hero handleEvent={setSearchTerm} />
+        <PremieresSection />
         <MovieList
-          id="movies"
+          id="now-showing"
           title="Now Showing 🎬"
           movies={filteredMovies}
           favorites={favorites}
@@ -57,6 +58,7 @@ const App = () => {
         )}
       </main>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 };
