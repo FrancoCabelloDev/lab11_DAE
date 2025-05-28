@@ -1,8 +1,14 @@
 import Button from "../widgets/Button";
 import Rating from "../widgets/Rating";
+import notifyFavorite from "../../utils/notifyFavorite"; // Agregado
 
 const MovieCard = ({ movie, isFavorite, onToggleFavorite = () => { } }) => {
   const { title, rating, genre, duration, image, description, showTimes } = movie;
+
+  const handleFavorite = () => {
+    onToggleFavorite(movie);
+    notifyFavorite(movie, !isFavorite); // Notifica después de cambiar el estado
+  };
 
   return (
     <article className="card d-flex f-direction-column">
@@ -19,7 +25,7 @@ const MovieCard = ({ movie, isFavorite, onToggleFavorite = () => { } }) => {
         <Button
           variant="secondary"
           className="interactive p-absolute t-2 r-2"
-          onClick={() => onToggleFavorite(movie)}
+          onClick={handleFavorite} // Cambiado
           aria-label={isFavorite ? `Remove ${title} from favorites` : `Add ${title} to favorites`}
         >
           {isFavorite ? "❤️" : "🤍"}
