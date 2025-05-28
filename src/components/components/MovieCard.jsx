@@ -31,9 +31,13 @@ const MovieCard = ({ movie, isFavorite, onToggleFavorite = () => { } }) => {
           <Rating value={rating} />
           <span className="interactive c-secondary">{duration}</span>
         </div>
-        <p className="text text--sm c-shadow">{description.slice(0, 256)}...</p>
+        <p className="text text--sm c-shadow">
+          {description.slice(0, 256)}...
+        </p>
         <div className="d-flex f-direction-column g-2 m-top-auto">
-          <h4 className="interactive interactive--lg c-primary">Today's Showtimes</h4>
+          <h4 className="interactive interactive--lg c-primary">
+            Today's Showtimes
+          </h4>
           <div className="d-flex f-wrap g-2">
             {showTimes.map((time, index) => (
               <a
@@ -52,3 +56,4 @@ const MovieCard = ({ movie, isFavorite, onToggleFavorite = () => { } }) => {
 };
 
 export default MovieCard;
+
